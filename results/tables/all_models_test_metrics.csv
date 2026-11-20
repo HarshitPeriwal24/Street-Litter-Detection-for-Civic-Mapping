@@ -1,0 +1,9 @@
+Experiment,Model,Phase,P (6-class),R (6-class),mAP@.5 (6-class),mAP@.5:.95 (6-class),"mAP@.5 (22-class, detector)","mAP@.5:.95 (22-class, detector)",Detector train time (min)
+exp1,yolov5s,baseline,0.3009,0.2381,0.1869,0.1258,0.1377,0.0949,9.7039
+exp2,yolov5l,baseline,0.278,0.2427,0.159,0.1195,0.1118,0.0884,19.425
+exp3,yolov8s,baseline,0.1569,0.2406,0.1774,0.1342,0.1796,0.1444,7.3046
+exp4,yolo26s,baseline,0.1795,0.3707,0.1934,0.1614,0.1864,0.1613,11.8451
+exp5,yolov5s + Inception,hybrid,0.3429,0.34,0.2456,0.1599,0.1377,0.0949,9.7039
+exp6,yolov5l + Inception,hybrid,0.3103,0.3268,0.2543,0.1871,0.1118,0.0884,19.425
+exp7,yolov8s + Inception,hybrid,0.3247,0.3162,0.2373,0.1854,0.1796,0.1444,7.3046
+exp8,yolo26s + Inception,hybrid,0.268,0.3025,0.2022,0.1633,0.1864,0.1613,11.8451

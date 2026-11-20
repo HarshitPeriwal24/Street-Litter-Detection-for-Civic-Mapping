@@ -1,0 +1,41 @@
+{
+ "model": "yolov5l+inception",
+ "phase": "hybrid",
+ "detector": "yolov5l",
+ "final_6class": {
+  "P": 0.3102678471288971,
+  "R": 0.3268494326867885,
+  "mAP50": 0.2542593616941173,
+  "mAP50_95": 0.18713481411924376,
+  "n_images": 113,
+  "n_gt": 196,
+  "classes_evaluated": 6,
+  "per_class_AP50": {
+   "0": 0.3907959564975033,
+   "1": 0.08632090090090089,
+   "2": 0.3417118512645003,
+   "3": 0.2961048377978194,
+   "4": 0.4106226237039797,
+   "5": 0.0
+  }
+ },
+ "classifier": {
+  "train_acc_last_epoch": 0.8608644008636475,
+  "best_val_acc": 0.6908212304115295,
+  "val_acc": 0.6908212304115295,
+  "test_acc": 0.7052631378173828,
+  "total_params": 21815078,
+  "epochs": 100,
+  "batch": 64,
+  "input": 224
+ },
+ "hybrid_score": "det",
+ "train_minutes": 19.42498524983724,
+ "eval_cfg": {
+  "conf": 0.001,
+  "nms_iou": 0.6,
+  "agnostic_nms_before_classifier": true,
+  "max_det": 100,
+  "split": "test"
+ }
+}

@@ -1,0 +1,10 @@
+{
+ "train_acc_last_epoch": 0.8608644008636475,
+ "best_val_acc": 0.6908212304115295,
+ "val_acc": 0.6908212304115295,
+ "test_acc": 0.7052631378173828,
+ "total_params": 21815078,
+ "epochs": 100,
+ "batch": 64,
+ "input": 224
+}
