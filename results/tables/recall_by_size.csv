@@ -1,0 +1,25 @@
+detector,system,size,objects,recall_class_correct_pct
+yolov5s,baseline,<1% of image,108,20.3704
+yolov5s,baseline,1-5%,47,40.4255
+yolov5s,baseline,>5%,41,48.7805
+yolov5s,hybrid,<1% of image,108,21.2963
+yolov5s,hybrid,1-5%,47,44.6809
+yolov5s,hybrid,>5%,41,53.6585
+yolov5l,baseline,<1% of image,108,22.2222
+yolov5l,baseline,1-5%,47,44.6809
+yolov5l,baseline,>5%,41,41.4634
+yolov5l,hybrid,<1% of image,108,23.1481
+yolov5l,hybrid,1-5%,47,46.8085
+yolov5l,hybrid,>5%,41,46.3415
+yolov8s,baseline,<1% of image,108,18.5185
+yolov8s,baseline,1-5%,47,31.9149
+yolov8s,baseline,>5%,41,43.9024
+yolov8s,hybrid,<1% of image,108,20.3704
+yolov8s,hybrid,1-5%,47,38.2979
+yolov8s,hybrid,>5%,41,53.6585
+yolo26s,baseline,<1% of image,108,19.4444
+yolo26s,baseline,1-5%,47,25.5319
+yolo26s,baseline,>5%,41,46.3415
+yolo26s,hybrid,<1% of image,108,21.2963
+yolo26s,hybrid,1-5%,47,27.6596
+yolo26s,hybrid,>5%,41,51.2195

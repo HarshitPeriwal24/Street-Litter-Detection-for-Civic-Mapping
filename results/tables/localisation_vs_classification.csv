@@ -1,0 +1,9 @@
+detector,system,objects,located_pct,located_and_correct_class_pct
+yolov5s,baseline,196,44.3878,31.1224
+yolov5s,hybrid,196,44.3878,33.6735
+yolov5l,baseline,196,44.898,31.6327
+yolov5l,hybrid,196,44.898,33.6735
+yolov8s,baseline,196,41.3265,27.0408
+yolov8s,hybrid,196,41.3265,31.6327
+yolo26s,baseline,196,41.3265,26.5306
+yolo26s,hybrid,196,41.3265,29.0816

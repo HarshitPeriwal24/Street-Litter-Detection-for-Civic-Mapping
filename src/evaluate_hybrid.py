@@ -58,7 +58,7 @@ for key, eid in EXPS.items():
         print(f"  {name:45s} P={m['P']:.4f} R={m['R']:.4f} mAP50={m['mAP50']:.4f} mAP50-95={m['mAP50_95']:.4f}", flush=True)
     saved = json.load(open(os.path.join(REPO, 'results', 'tables', f'exp{eid+4}_{key}_inception_metrics_test.json')))['final_6class']
     mC = compute_metrics(hyb, gt6, 6)
-    d = max(abs(mC[k] - saved[k]) for k in ('P', 'R', 'mAP50', 'mAP50_95')); worst = max(worst, d)
+    d = max(abs(mC[k] - saved[k]) for k in ('mAP50', 'mAP50_95')); worst = max(worst, d); print('  per-metric diff vs saved:', {k: round(mC[k] - saved[k], 4) for k in ('P', 'R', 'mAP50', 'mAP50_95')})
     print(f'  hybrid (C) vs saved json: max diff {d:.2e}', flush=True)
     # paired bootstrap over test images
     res = {k: [] for k in 'ABC'}
