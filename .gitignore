@@ -5,3 +5,9 @@
 data/
 artifacts/
 runs/
+__pycache__/
+*.pyc
+venv/
+.venv/
+weights/
+demo_out/
