@@ -18,7 +18,14 @@ for d in (RAW, YDIR, CDIR): os.makedirs(d, exist_ok=True)
 print(f'SEEDS: split seed={SEED_SPLIT}, training seed (original Colab runs)={SEED_TRAIN}', flush=True)
 
 ANN_URL = 'https://raw.githubusercontent.com/pedropro/TACO/master/data/annotations.json'
-ann = requests.get(ANN_URL, timeout=60).json()
+def get_json(url, tries=6):
+    import time
+    for i in range(tries):
+        try: return requests.get(url, timeout=60).json()
+        except Exception as e:
+            print(f'retry {i+1}/{tries} for {url}: {type(e).__name__}', flush=True); time.sleep(5 * (i + 1))
+    raise SystemExit(f'could not download {url}')
+ann = get_json(ANN_URL)
 print(len(ann['images']), 'images,', len(ann['annotations']), 'annotations')
 
 def fetch(img):
