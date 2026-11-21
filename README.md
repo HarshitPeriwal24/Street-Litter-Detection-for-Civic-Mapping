@@ -11,14 +11,26 @@ TACO (Proenca & Simoes, 2020), official `annotations.json`, 1,500 images: https:
 ## Reproduce the main table
 Requirements: git, bash (Git Bash on Windows; Linux, macOS, WSL or Colab also work), Python 3.12, internet access and about 6 GB of free disk. No GPU is needed, and nothing is retrained (training was done once on Colab, see below).
 
+**Windows (Git Bash):**
 ```
 git clone https://github.com/nipun1015/Street-Litter-Detection-for-Civic-Mapping.git
 cd Street-Litter-Detection-for-Civic-Mapping
-python3 -m venv venv              # Windows Git Bash: py -3.12 -m venv venv
-source venv/bin/activate          # Windows Git Bash: source venv/Scripts/activate
-python --version                  # must print 3.12.x
+py -3.12 -m venv venv
+source venv/Scripts/activate
+python --version                  # should print 3.12.x
 bash run_all.sh
 ```
+
+**Linux / macOS / WSL:**
+```
+git clone https://github.com/nipun1015/Street-Litter-Detection-for-Civic-Mapping.git
+cd Street-Litter-Detection-for-Civic-Mapping
+python3 -m venv venv
+source venv/bin/activate
+python --version                  # should print 3.12.x
+bash run_all.sh
+```
+In Colab, skip the venv lines and run `!bash run_all.sh`.
 
 `run_all.sh` installs `requirements.txt`, downloads the released detections and InceptionV3 model, rebuilds the data, runs the controls, recomputes all rows and writes `results/main_table.md`. Every log is saved in `results/logs/`. Seeds are printed at the top of each log: split seed 42, training seed 0 (original Colab runs), bootstrap seed 0. In Colab, skip the venv lines and run `!bash run_all.sh`.
  Use Python 3.12 exactly (the pinned TensorFlow 2.21 and PyTorch builds are not available for newer Python versions). Check with `python --version`; on Windows you can create the environment with `py -3.12 -m venv venv`.
