@@ -41,7 +41,7 @@ In Colab, skip the venv lines and run `!bash run_all.sh`.
 
 ## Hardware and runtime
 - Training: Colab, NVIDIA A100 40 GB, run on a friend's laptop/account (Aarush). Detectors took 9.7 min (YOLOv5s), 19.4 (YOLOv5l), 7.3 (YOLOv8s), 11.8 (YOLO26s) for 100 epochs, batch 16, image size 416.
-- Evaluation (`run_all.sh`): Intel Core i5-1235U, 16 GB RAM, Windows, Python 3.12, no GPU. About [CONFIRM minutes, from the fresh-clone run] in total.
+- Evaluation (`run_all.sh`): Intel Core i5-1235U, 16 GB RAM, Windows, Python 3.12, no GPU. About 14m16.521s in total.
 - Training was run once in Colab from `notebooks/training_colab_original.ipynb` (committed unchanged) and was not re-run from this repo. GPU training is not bit-reproducible (`deterministic=False`), so a retrain gives close but not identical numbers. The evaluation from the released detections is deterministic.
 
 ## Results (TACO test, 113 images, 196 objects, 6 super-categories)
@@ -63,7 +63,7 @@ We used AI assistance in this project. In detail:
   decision to evaluate four detectors with the two-stage method, the scope of
   what to keep or drop, and interpretation of the results.
 - Training code (notebooks/training_colab_original.ipynb): extracted from repo but used ai  assistance also .
-- Evaluation code (src/*.py, run_all.sh): written with AI assistance (Claude).
+- Evaluation code (src/*.py, run_all.sh): written with AI assistance.
   We ran every script on our own machine, checked that the outputs reproduce the
   numbers saved from training, and reviewed the control and ablation results.
 - README and analysis design: drafted and edited by us.
