@@ -9,7 +9,7 @@ mkdir -p results/logs artifacts
 [ "${SKIP_INSTALL:-0}" = "1" ] || $PY -m pip install -r requirements.txt
 if [ ! -f artifacts/waste_experiments/exp1_yolov5s/test_detections.pkl ]; then
   $PY -m gdown --fuzzy "$ARTIFACTS_URL" -O artifacts/artifacts.zip
-  $PY -m zipfile -e artifacts/artifacts.zip artifacts/
+  $PY src/extract_artifacts.py artifacts/artifacts.zip artifacts
 fi
 $PY src/prepare_data.py                                   2>&1 | tee results/logs/prepare_data.log
 $PY src/controls.py            --artifacts artifacts      2>&1 | tee results/logs/controls.log

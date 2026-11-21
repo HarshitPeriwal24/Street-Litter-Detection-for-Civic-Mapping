@@ -9,10 +9,17 @@ Detect street litter in TACO images and test whether a second-stage classifier i
 TACO (Proenca & Simoes, 2020), official `annotations.json`, 1,500 images: https://github.com/pedropro/TACO . Subset: the 22 categories of the baseline paper's Table 1 (1,116 images; 892 / 111 / 113 train/val/test, split seed 42), grouped into 6 super-categories (cardboard, paper, plastic, metal, glass, trash). `src/prepare_data.py` downloads the images from Flickr and verifies that the rebuilt split and class counts are identical to the original run. No dataset is stored in this repo.
 
 ## Reproduce the main table
+Requirements: git, bash (Git Bash on Windows; Linux, macOS, WSL or Colab also work), Python 3.12, internet access and about 6 GB of free disk. No GPU is needed, and nothing is retrained (training was done once on Colab, see below).
+
 ```
+git clone https://github.com/nipun1015/Street-Litter-Detection-for-Civic-Mapping.git
+cd Street-Litter-Detection-for-Civic-Mapping
+python -m venv venv
+source venv/bin/activate          # Windows Git Bash: source venv/Scripts/activate
 bash run_all.sh
 ```
-Run from a fresh clone (Git Bash on Windows, or Linux/macOS). It installs `requirements.txt`, downloads the released detections and InceptionV3 model, rebuilds the data, runs the controls, recomputes all rows and writes `results/main_table.md`. Every log is saved in `results/logs/`. Seeds are printed at the top of each log: split seed 42, training seed 0 (original Colab runs), bootstrap seed 0.
+
+`run_all.sh` installs `requirements.txt`, downloads the released detections and InceptionV3 model, rebuilds the data, runs the controls, recomputes all rows and writes `results/main_table.md`. Every log is saved in `results/logs/`. Seeds are printed at the top of each log: split seed 42, training seed 0 (original Colab runs), bootstrap seed 0. In Colab, skip the venv lines and run `!bash run_all.sh`.
 
 ## Artifacts (download links, not in the repo)
 - Detections + InceptionV3 model used by `run_all.sh` (77 MB): https://drive.google.com/file/d/12CViLk8V_4WIqX6KzsYZF5SNH9h3Rnib/view?usp=drive_link
