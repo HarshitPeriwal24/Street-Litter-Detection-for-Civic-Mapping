@@ -4,11 +4,11 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 PY="${PYTHON:-python}"
-ARTIFACTS_URL="${ARTIFACTS_URL:-https://drive.google.com/file/d/12CViLk8V_4WIqX6KzsYZF5SNH9h3Rnib/view?usp=drive_link}"
+ARTIFACTS_ID="${ARTIFACTS_ID:-12CViLk8V_4WIqX6KzsYZF5SNH9h3Rnib}"
 mkdir -p results/logs artifacts
 [ "${SKIP_INSTALL:-0}" = "1" ] || $PY -m pip install -r requirements.txt
 if [ ! -f artifacts/waste_experiments/exp1_yolov5s/test_detections.pkl ]; then
-  $PY -m gdown --fuzzy "$ARTIFACTS_URL" -O artifacts/artifacts.zip
+  $PY -m gdown "$ARTIFACTS_ID" -O artifacts/artifacts.zip
   $PY src/extract_artifacts.py artifacts/artifacts.zip artifacts
 fi
 $PY src/prepare_data.py                                   2>&1 | tee results/logs/prepare_data.log
