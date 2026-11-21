@@ -1,0 +1,7 @@
+SEEDS: split seed=42, training seed (original Colab runs)=0
+1500 images, 4784 annotations
+downloaded 1500/1500 images
+images with selected categories: 1116  (train 892 / val 111 / test 113)
+classifier crops: {'train': 1689, 'val': 207, 'test': 190}
+VERIFY split identical to original run: True | class counts identical: True | crop counts identical: True
+OK: test set is identical to the one used for the reported results.
