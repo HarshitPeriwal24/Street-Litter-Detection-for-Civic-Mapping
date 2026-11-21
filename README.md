@@ -14,13 +14,14 @@ Requirements: git, bash (Git Bash on Windows; Linux, macOS, WSL or Colab also wo
 ```
 git clone https://github.com/nipun1015/Street-Litter-Detection-for-Civic-Mapping.git
 cd Street-Litter-Detection-for-Civic-Mapping
-python -m venv venv
+python3 -m venv venv              # Windows Git Bash: py -3.12 -m venv venv
 source venv/bin/activate          # Windows Git Bash: source venv/Scripts/activate
+python --version                  # must print 3.12.x
 bash run_all.sh
 ```
 
 `run_all.sh` installs `requirements.txt`, downloads the released detections and InceptionV3 model, rebuilds the data, runs the controls, recomputes all rows and writes `results/main_table.md`. Every log is saved in `results/logs/`. Seeds are printed at the top of each log: split seed 42, training seed 0 (original Colab runs), bootstrap seed 0. In Colab, skip the venv lines and run `!bash run_all.sh`.
-Use Python 3.12 exactly (the pinned TensorFlow 2.21 and PyTorch builds are not available for newer Python versions). Check with `python --version`; on Windows you can create the environment with `py -3.12 -m venv venv`.
+ Use Python 3.12 exactly (the pinned TensorFlow 2.21 and PyTorch builds are not available for newer Python versions). Check with `python --version`; on Windows you can create the environment with `py -3.12 -m venv venv`.
 
 ## Artifacts (download links, not in the repo)
 - Detections + InceptionV3 model used by `run_all.sh` (77 MB): https://drive.google.com/file/d/12CViLk8V_4WIqX6KzsYZF5SNH9h3Rnib/view?usp=drive_link
