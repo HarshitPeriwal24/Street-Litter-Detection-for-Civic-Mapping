@@ -14,6 +14,8 @@ ap.add_argument('--data', default=os.path.join(REPO, 'data'))
 args = ap.parse_args()
 DATA = args.data.replace('\\', '/')
 RAW, YDIR, CDIR = f'{DATA}/taco_raw', f'{DATA}/taco_yolo', f'{DATA}/taco_cls'
+import shutil
+for d in (YDIR, CDIR): shutil.rmtree(d, ignore_errors=True)   # always rebuild from scratch, never reuse files from an earlier run
 for d in (RAW, YDIR, CDIR): os.makedirs(d, exist_ok=True)
 print(f'SEEDS: split seed={SEED_SPLIT}, training seed (original Colab runs)={SEED_TRAIN}', flush=True)
 
@@ -42,6 +44,7 @@ def fetch(img):
     return False
 with ThreadPoolExecutor(32) as ex: ok = list(ex.map(fetch, ann['images']))
 print(f'downloaded {sum(ok)}/{len(ok)} images', flush=True)
+if not all(ok): sys.exit(f'ERROR: {len(ok)-sum(ok)} images could not be downloaded - run again to retry (finished downloads are kept)')
 
 cats = {c['id']: c['name'] for c in ann['categories']}
 sel = set(ID2IDX)
