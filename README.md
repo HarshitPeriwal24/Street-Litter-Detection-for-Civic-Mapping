@@ -20,6 +20,7 @@ bash run_all.sh
 ```
 
 `run_all.sh` installs `requirements.txt`, downloads the released detections and InceptionV3 model, rebuilds the data, runs the controls, recomputes all rows and writes `results/main_table.md`. Every log is saved in `results/logs/`. Seeds are printed at the top of each log: split seed 42, training seed 0 (original Colab runs), bootstrap seed 0. In Colab, skip the venv lines and run `!bash run_all.sh`.
+Use Python 3.12 exactly (the pinned TensorFlow 2.21 and PyTorch builds are not available for newer Python versions). Check with `python --version`; on Windows you can create the environment with `py -3.12 -m venv venv`.
 
 ## Artifacts (download links, not in the repo)
 - Detections + InceptionV3 model used by `run_all.sh` (77 MB): https://drive.google.com/file/d/12CViLk8V_4WIqX6KzsYZF5SNH9h3Rnib/view?usp=drive_link
