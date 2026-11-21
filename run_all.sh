@@ -7,6 +7,7 @@ PY="${PYTHON:-python}"
 ARTIFACTS_ID="${ARTIFACTS_ID:-12CViLk8V_4WIqX6KzsYZF5SNH9h3Rnib}"
 mkdir -p results/logs artifacts
 [ "${SKIP_INSTALL:-0}" = "1" ] || $PY -m pip install -r requirements.txt
+$PY -c "import tensorflow" 2>/dev/null || { echo "ERROR: TensorFlow cannot be imported (wrong Python, or blocked by an OS policy). Use Python 3.12, or run in WSL/Linux/Colab. See README."; exit 1; }
 if [ ! -f artifacts/waste_experiments/exp1_yolov5s/test_detections.pkl ]; then
   $PY -m gdown "$ARTIFACTS_ID" -O artifacts/artifacts.zip
   $PY src/extract_artifacts.py artifacts/artifacts.zip artifacts
