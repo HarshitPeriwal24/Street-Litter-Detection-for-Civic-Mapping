@@ -19,15 +19,47 @@ for d in (YDIR, CDIR): shutil.rmtree(d, ignore_errors=True)   # always rebuild f
 for d in (RAW, YDIR, CDIR): os.makedirs(d, exist_ok=True)
 print(f'SEEDS: split seed={SEED_SPLIT}, training seed (original Colab runs)={SEED_TRAIN}', flush=True)
 
-ANN_URL = 'https://raw.githubusercontent.com/pedropro/TACO/master/data'
-def get_json(url, tries=6):
-    import time
+import subprocess
+ANN_URLS = ['https://raw.githubusercontent.com/pedropro/TACO/master/data/annotations.json',
+            'https://cdn.jsdelivr.net/gh/pedropro/TACO@master/data/annotations.json',
+            'https://github.com/pedropro/TACO/raw/master/data/annotations.json']
+
+def http_get(url, timeout=60):
+    """Bytes of the URL or None. Python requests first; if the connection itself fails (some networks reset Python's
+    TLS handshake but let curl through), fall back to curl. A real HTTP answer such as 404 is not retried with curl."""
+    try:
+        r = requests.get(url, timeout=timeout)
+        return r.content if r.status_code == 200 else None
+    except Exception:
+        pass
+    curl = shutil.which('curl')
+    if curl:
+        try:
+            p = subprocess.run([curl, '-sSL', '--retry', '2', '-m', str(timeout), url], capture_output=True, timeout=timeout + 30)
+            if p.returncode == 0 and p.stdout: return p.stdout
+        except Exception:
+            pass
+    return None
+
+def get_annotations(tries=4):
+    local = f'{DATA}/annotations.json'      # a copy saved by an earlier run, or placed here by hand
+    if os.path.exists(local):
+        try:
+            j = json.load(open(local, encoding='utf-8'))
+            if 'images' in j and 'annotations' in j: print('using', local); return j
+        except Exception: pass
     for i in range(tries):
-        try: return requests.get(url, timeout=60).json()
-        except Exception as e:
-            print(f'retry {i+1}/{tries} for {url}: {type(e).__name__}', flush=True); time.sleep(5 * (i + 1))
-    raise SystemExit(f'could not download {url}')
-ann = get_json(ANN_URL)
+        for url in ANN_URLS:
+            b = http_get(url)
+            if b:
+                try:
+                    j = json.loads(b)
+                    if 'images' in j and 'annotations' in j:
+                        json.dump(j, open(local, 'w', encoding='utf-8')); return j
+                except Exception: pass
+        print(f'retry {i+1}/{tries}: TACO annotations not reachable from any source', flush=True); time.sleep(5 * (i + 1))
+    raise SystemExit('could not download the TACO annotations. Open ' + ANN_URLS[0] + ' in a browser, save the file as ' + local + ' and run again.')
+ann = get_annotations()
 print(len(ann['images']), 'images,', len(ann['annotations']), 'annotations')
 
 def fetch(img):
@@ -36,11 +68,10 @@ def fetch(img):
     for url in (img.get('flickr_640_url'), img.get('flickr_url')):
         if not url: continue
         for _ in range(3):
-            try:
-                r = requests.get(url, timeout=30)
-                if r.status_code == 200 and len(r.content) > 1000:
-                    open(out, 'wb').write(r.content); return True
-            except Exception: time.sleep(1)
+            c = http_get(url, 30)
+            if c and len(c) > 1000:
+                open(out, 'wb').write(c); return True
+            time.sleep(1)
     return False
 with ThreadPoolExecutor(32) as ex: ok = list(ex.map(fetch, ann['images']))
 print(f'downloaded {sum(ok)}/{len(ok)} images', flush=True)
