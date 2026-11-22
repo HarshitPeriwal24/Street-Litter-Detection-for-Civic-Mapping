@@ -8,6 +8,9 @@ Detect street litter in TACO images and test whether a second-stage classifier i
 ## Dataset
 TACO (Proenca & Simoes, 2020), official `annotations.json`, 1,500 images: https://github.com/pedropro/TACO . Subset: the 22 categories of the baseline paper's Table 1 (1,116 images; 892 / 111 / 113 train/val/test, split seed 42), grouped into 6 super-categories (cardboard, paper, plastic, metal, glass, trash). `src/prepare_data.py` downloads the images from Flickr and verifies that the rebuilt split and class counts are identical to the original run. No dataset is stored in this repo.
 
+## Requirements.txt
+[View Requirements.txt](requirements.txt)
+
 ## Reproduce the main table
 Requirements: git, bash (Git Bash on Windows; Linux, macOS, WSL or Colab also work), Python 3.12, internet access and about 6 GB of free disk. No GPU is needed, and nothing is retrained (training was done once on Colab, see below).
 
