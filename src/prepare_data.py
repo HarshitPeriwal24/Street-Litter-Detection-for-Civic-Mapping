@@ -19,7 +19,7 @@ for d in (YDIR, CDIR): shutil.rmtree(d, ignore_errors=True)   # always rebuild f
 for d in (RAW, YDIR, CDIR): os.makedirs(d, exist_ok=True)
 print(f'SEEDS: split seed={SEED_SPLIT}, training seed (original Colab runs)={SEED_TRAIN}', flush=True)
 
-ANN_URL = 'https://raw.githubusercontent.com/pedropro/TACO/master/data/annotations.json'
+ANN_URL = 'https://raw.githubusercontent.com/pedropro/TACO/master/data'
 def get_json(url, tries=6):
     import time
     for i in range(tries):
